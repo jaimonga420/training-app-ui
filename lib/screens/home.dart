@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/colors.dart' as color;
+import '../widgets/nextworkout.dart';
+import '../widgets/header.dart';
+import '../widgets/details.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,33 +18,18 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: color.AppColor.homePageBackground,
       body: Container(
-        padding: const EdgeInsets.only(top: 70, left: 30),
+        padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
         child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  'Training',
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: color.AppColor.homePageTitle,
-                      fontWeight: FontWeight.w700),
-                ),
-                Spacer(),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_back_ios_new),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.calendar_today_outlined),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_forward_ios),
-                ),
-              ],
-            )
+          children: const <Widget>[
+            Header(),
+            SizedBox(
+              height: 10,
+            ),
+            Details(),
+            SizedBox(
+              height: 20,
+            ),
+            Nextworkout()
           ],
         ),
       ),
