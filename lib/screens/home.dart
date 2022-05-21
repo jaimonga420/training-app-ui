@@ -4,6 +4,7 @@ import '../helpers/colors.dart' as color;
 import '../widgets/nextworkout.dart';
 import '../widgets/header.dart';
 import '../widgets/details.dart';
+import '../widgets/doinggreat.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,7 +30,8 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 20,
             ),
-            Nextworkout()
+            Nextworkout(),
+            Doinggreat()
           ],
         ),
       ),
