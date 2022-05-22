@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/colors.dart' as color;
-import '../widgets/nextworkout.dart';
+import '../widgets/next_workout.dart';
 import '../widgets/header.dart';
 import '../widgets/details.dart';
-import '../widgets/doinggreat.dart';
-import '../widgets/areaoffocus.dart';
+import '../widgets/doing_great.dart';
+import '../widgets/area_of_focus.dart';
 
 class Home extends StatefulWidget {
+  static const routeName = '/home';
   const Home({Key? key}) : super(key: key);
 
   @override

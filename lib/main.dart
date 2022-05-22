@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:training_app/screens/videos_info_screen.dart';
 
-import './screens/home.dart';
+import 'screens/home_screen.dart';
+import './screens/videos_info_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +21,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Home(),
+      routes: {
+        '/videosinfo' :(context) => VideosInfo(),
+        '/home' :(context) => Home(),
+      },
+
     );
+    
   }
 }
