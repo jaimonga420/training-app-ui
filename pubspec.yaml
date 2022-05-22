@@ -55,6 +55,7 @@ flutter:
 
   assets:  # Lists assets, such as image files
     - assets/images/
+    - json/
     
 
         # An image asset can refer to one or more resolution-specific "variants", see

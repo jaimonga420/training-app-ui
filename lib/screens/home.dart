@@ -5,6 +5,7 @@ import '../widgets/nextworkout.dart';
 import '../widgets/header.dart';
 import '../widgets/details.dart';
 import '../widgets/doinggreat.dart';
+import '../widgets/areaoffocus.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -31,10 +32,33 @@ class _HomeState extends State<Home> {
               height: 20,
             ),
             Nextworkout(),
-            Doinggreat()
+            Doinggreat(),
+            Focusheading(),
+            AreaOfFocus(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class Focusheading extends StatelessWidget {
+  const Focusheading({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          'Area Of Focus',
+          style: TextStyle(
+              color: color.AppColor.homePageTitle,
+              fontSize: 25,
+              fontWeight: FontWeight.w500),
+        ),
+      ],
     );
   }
 }
