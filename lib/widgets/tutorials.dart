@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../helpers/colors.dart' as color;
+import '../widgets/videos_list.dart';
 
 class Tutorials extends StatefulWidget {
   const Tutorials({Key? key}) : super(key: key);
@@ -12,11 +13,13 @@ class Tutorials extends StatefulWidget {
 }
 
 class _TutorialsState extends State<Tutorials> {
-  var _tutorialsList = [];
+  var _videosList = [];
 
-  _initData() {
-    DefaultAssetBundle.of(context).loadString('json/info.json').then((value) {
-      _tutorialsList = json.decode(value);
+  _initData() async {
+    await DefaultAssetBundle.of(context)
+        .loadString('json/videoinfo.json')
+        .then((value) {
+      _videosList = json.decode(value);
     });
   }
 
@@ -50,19 +53,20 @@ class _TutorialsState extends State<Tutorials> {
                     color: color.AppColor.circuitsColor,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 90,
                 ),
                 Icon(
                   Icons.loop_outlined,
                   color: color.AppColor.loopColor,
                 ),
-                Text(
+                const Text(
                   '3 Sets',
                   style: TextStyle(),
                 )
               ],
-            )
+            ),
+            VideosList(),
           ],
         ),
       ),

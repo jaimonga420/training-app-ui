@@ -22,11 +22,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const Home(),
       routes: {
-        '/videosinfo' :(context) => VideosInfo(),
-        '/home' :(context) => Home(),
+        '/videosinfo': (context) => VideosInfo(),
+        '/home': (context) => Home(),
       },
-
     );
-    
   }
 }

@@ -14,9 +14,13 @@ class AreaOfFocus extends StatefulWidget {
 class _AreaOfFocusState extends State<AreaOfFocus> {
   var _muscleList = [];
 
-  _initData() {
-    DefaultAssetBundle.of(context).loadString('json/info.json').then((value) {
-      _muscleList = json.decode(value);
+  _initData() async {
+    await DefaultAssetBundle.of(context)
+        .loadString('json/info.json')
+        .then((value) {
+      setState(() {
+        _muscleList = json.decode(value);
+      });
     });
   }
 

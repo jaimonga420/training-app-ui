@@ -32,7 +32,9 @@ class _DetailsState extends State<Details> {
         IconButton(
           color: color.AppColor.homePageIcons,
           onPressed: () {
-            Navigator.of(context).pushNamed(VideosInfo.routeName);
+            Navigator.of(context).pushNamed(VideosInfo.routeName).then((value) {
+              setState(() {});
+            });
           },
           icon: const Icon(Icons.arrow_forward),
         ),
