@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../helpers/colors.dart' as color;
+import '../providers/videoplayer_provider.dart';
 
 class VideosList extends StatefulWidget {
   const VideosList({Key? key}) : super(key: key);
@@ -39,10 +40,13 @@ class _VideosListState extends State<VideosList> {
             return GestureDetector(
               onTap: () {
                 debugPrint(index.toString());
+                Provider.of<VideoPlayerProvider>(context, listen: false)
+                    .loadPlayer();
+                Provider.of<VideoPlayerProvider>(context, listen: false)
+                    .onTapVideo(index, _videosList);
               },
               child: Container(
                 height: 135,
-                // color: Colors.red,
                 child: Column(
                   children: [
                     Row(

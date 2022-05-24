@@ -13,7 +13,9 @@ class Tutorials extends StatefulWidget {
 }
 
 class _TutorialsState extends State<Tutorials> {
+ 
   var _videosList = [];
+  
 
   _initData() async {
     await DefaultAssetBundle.of(context)

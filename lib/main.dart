@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:training_app/screens/videos_info_screen.dart';
-
-import 'screens/home_screen.dart';
+import 'package:provider/provider.dart';
 import './screens/videos_info_screen.dart';
 
+import 'screens/home_screen.dart';
+import './providers/videoplayer_provider.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => VideoPlayerProvider())],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

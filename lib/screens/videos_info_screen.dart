@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 import '../helpers/colors.dart' as color;
 import '../widgets/tutorials.dart';
+import '../widgets/video_info_header.dart';
 import './home_screen.dart';
+import '../providers/videoplayer_provider.dart';
 
 class VideosInfo extends StatefulWidget {
   static const routeName = '/videosinfo';
@@ -15,127 +19,75 @@ class VideosInfo extends StatefulWidget {
 class _VideosInfoState extends State<VideosInfo> {
   @override
   Widget build(BuildContext context) {
+    bool isPlayerLoaded =
+        Provider.of<VideoPlayerProvider>(context).isPlayerLoaded;
+    VideoPlayerController? playerController =
+        Provider.of<VideoPlayerProvider>(context).playerController;
+    print(playerController);
+
+    Widget _playVideo(BuildContext context) {
+      if (playerController != null) {
+        return AspectRatio(
+          aspectRatio: 16.33 / 9,
+          child: VideoPlayer(playerController),
+        );
+      } else {
+        return const AspectRatio(
+          aspectRatio: 16.4 / 9,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            color.AppColor.gradientFirst.withOpacity(0.9),
-            color.AppColor.gradientSecond
-          ], begin: const FractionalOffset(0, 0.4), end: Alignment.topRight),
+          gradient: isPlayerLoaded
+              ? null
+              : LinearGradient(
+                  colors: [
+                      color.AppColor.gradientFirst.withOpacity(0.9),
+                      color.AppColor.gradientSecond
+                    ],
+                  begin: const FractionalOffset(0, 0.4),
+                  end: Alignment.topRight),
         ),
-        child: Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(Home.routeName);
-                        
-                      },
-                      icon: Icon(Icons.arrow_back_ios),
-                      color: color.AppColor.secondPageTopIconColor,
+        child: Column(
+          children: [
+            isPlayerLoaded
+                ? Container(
+                    padding: EdgeInsets.only(top: 40),
+                    height: 300,
+                    color: color.AppColor.secondPageContainerGradient2ndColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(Home.routeName);
+                              },
+                              icon: const Icon(Icons.arrow_back_ios),
+                              color: color.AppColor.secondPageTopIconColor,
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.info_outline),
+                              color: color.AppColor.secondPageTopIconColor,
+                            ),
+                          ],
+                        ),
+                        _playVideo(context)
+                      ],
                     ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.info_outline),
-                      color: color.AppColor.secondPageTopIconColor,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 30, right: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      'Legs Toning & Glutes Workout',
-                      style: TextStyle(
-                          color: color.AppColor.secondPageTitleColor,
-                          fontSize: 25),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 60, left: 30, right: 20, bottom: 40),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 90,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            color.AppColor.secondPageContainerGradient1stColor,
-                            color.AppColor.secondPageContainerGradient2ndColor
-                          ]),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.timer_outlined,
-                            color: color.AppColor.secondPageIconColor,
-                            size: 16,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '68 Mins',
-                            style: TextStyle(
-                                color: color.AppColor.secondPageIconColor,
-                                fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      width: 200,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            color.AppColor.secondPageContainerGradient1stColor,
-                            color.AppColor.secondPageContainerGradient2ndColor
-                          ]),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.handyman_outlined,
-                            color: color.AppColor.secondPageIconColor,
-                            size: 16,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Resistent Band, Kettebell',
-                            style: TextStyle(
-                                color: color.AppColor.secondPageIconColor,
-                                fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Tutorials(),
-            ],
-          ),
+                  )
+                : const VideoInfoHeader(),
+            const Tutorials(),
+          ],
         ),
       ),
     );
