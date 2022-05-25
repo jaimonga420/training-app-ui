@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/colors.dart' as color;
 import '../screens/home_screen.dart';
+import '../providers/videoplayer_provider.dart';
 
 class VideoInfoHeader extends StatefulWidget {
   const VideoInfoHeader({Key? key}) : super(key: key);

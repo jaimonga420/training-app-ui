@@ -23,12 +23,12 @@ class _VideosInfoState extends State<VideosInfo> {
         Provider.of<VideoPlayerProvider>(context).isPlayerLoaded;
     VideoPlayerController? playerController =
         Provider.of<VideoPlayerProvider>(context).playerController;
-    print(playerController);
+    bool isPlaying = Provider.of<VideoPlayerProvider>(context).isPlaying;
 
     Widget _playVideo(BuildContext context) {
       if (playerController != null) {
         return AspectRatio(
-          aspectRatio: 16.33 / 9,
+          aspectRatio: 23 / 9,
           child: VideoPlayer(playerController),
         );
       } else {
@@ -39,6 +39,37 @@ class _VideosInfoState extends State<VideosInfo> {
           ),
         );
       }
+    }
+
+    Widget _playerOptions(BuildContext context) {
+      return Container(
+        height: 40,
+        color: color.AppColor.gradientSecond,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              color: Colors.white,
+              onPressed: () {},
+              icon: Icon(Icons.fast_rewind),
+            ),
+            IconButton(
+              color: Colors.white,
+              onPressed: () async {
+                isPlaying
+                    ? playerController!.pause()
+                    : playerController!.play();
+              },
+              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+            ),
+            IconButton(
+              color: Colors.white,
+              onPressed: () {},
+              icon: Icon(Icons.fast_forward),
+            ),
+          ],
+        ),
+      );
     }
 
     return Scaffold(
@@ -59,7 +90,7 @@ class _VideosInfoState extends State<VideosInfo> {
             isPlayerLoaded
                 ? Container(
                     padding: EdgeInsets.only(top: 40),
-                    height: 300,
+                    height: 278.50,
                     color: color.AppColor.secondPageContainerGradient2ndColor,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -81,7 +112,8 @@ class _VideosInfoState extends State<VideosInfo> {
                             ),
                           ],
                         ),
-                        _playVideo(context)
+                        _playVideo(context),
+                        _playerOptions(context)
                       ],
                     ),
                   )
