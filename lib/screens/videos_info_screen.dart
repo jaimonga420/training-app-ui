@@ -42,6 +42,7 @@ class _VideosInfoState extends State<VideosInfo> {
     }
 
     Widget _playerOptions(BuildContext context) {
+      final bool noMute = (playerController!.value.volume) > 0;
       return Container(
         height: 40,
         color: color.AppColor.gradientSecond,
@@ -50,22 +51,29 @@ class _VideosInfoState extends State<VideosInfo> {
           children: [
             IconButton(
               color: Colors.white,
-              onPressed: () {},
-              icon: Icon(Icons.fast_rewind),
+              onPressed: () {
+                noMute
+                    ? playerController.setVolume(0)
+                    : playerController.setVolume(1);
+              },
+              icon: Icon(noMute ? Icons.volume_up_rounded : Icons.volume_off),
+            ),
+            IconButton(
+              color: Colors.white,
+              onPressed: () async {},
+              icon: const Icon(Icons.fast_rewind),
             ),
             IconButton(
               color: Colors.white,
               onPressed: () async {
-                isPlaying
-                    ? playerController!.pause()
-                    : playerController!.play();
+                isPlaying ? playerController.pause() : playerController.play();
               },
               icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
             ),
             IconButton(
               color: Colors.white,
               onPressed: () {},
-              icon: Icon(Icons.fast_forward),
+              icon: const Icon(Icons.fast_forward),
             ),
           ],
         ),
@@ -89,7 +97,7 @@ class _VideosInfoState extends State<VideosInfo> {
           children: [
             isPlayerLoaded
                 ? Container(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 40),
                     height: 278.50,
                     color: color.AppColor.secondPageContainerGradient2ndColor,
                     child: Column(

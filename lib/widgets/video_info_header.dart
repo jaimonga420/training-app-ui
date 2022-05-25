@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../helpers/colors.dart' as color;
 import '../screens/home_screen.dart';
-import '../providers/videoplayer_provider.dart';
 
 class VideoInfoHeader extends StatefulWidget {
   const VideoInfoHeader({Key? key}) : super(key: key);
@@ -25,13 +23,13 @@ class _VideoInfoHeaderState extends State<VideoInfoHeader> {
                 onPressed: () {
                   Navigator.of(context).pushNamed(Home.routeName);
                 },
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 color: color.AppColor.secondPageTopIconColor,
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.info_outline),
+                icon: const Icon(Icons.info_outline),
                 color: color.AppColor.secondPageTopIconColor,
               ),
             ],

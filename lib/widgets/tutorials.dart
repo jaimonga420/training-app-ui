@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 import '../helpers/colors.dart' as color;
@@ -13,24 +11,6 @@ class Tutorials extends StatefulWidget {
 }
 
 class _TutorialsState extends State<Tutorials> {
- 
-  var _videosList = [];
-  
-
-  _initData() async {
-    await DefaultAssetBundle.of(context)
-        .loadString('json/videoinfo.json')
-        .then((value) {
-      _videosList = json.decode(value);
-    });
-  }
-
-  @override
-  void initState() {
-    _initData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -68,7 +48,7 @@ class _TutorialsState extends State<Tutorials> {
                 )
               ],
             ),
-            VideosList(),
+            const VideosList(),
           ],
         ),
       ),

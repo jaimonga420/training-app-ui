@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 import '../providers/videoplayer_provider.dart';
 
@@ -15,7 +14,6 @@ class VideosList extends StatefulWidget {
 
 class _VideosListState extends State<VideosList> {
   var _videosList = [];
-
 
   _initData() async {
     await DefaultAssetBundle.of(context)
@@ -35,8 +33,6 @@ class _VideosListState extends State<VideosList> {
 
   @override
   Widget build(BuildContext context) {
-    VideoPlayerController? oldPlayerController =
-        Provider.of<VideoPlayerProvider>(context).playerController;
     return Expanded(
       child: ListView.builder(
           itemCount: _videosList.length,
@@ -48,8 +44,11 @@ class _VideosListState extends State<VideosList> {
                     .loadPlayer();
                 Provider.of<VideoPlayerProvider>(context, listen: false)
                     .onTapVideo(
-                        index, _videosList,);
+                  index,
+                  _videosList,
+                );
               },
+              // ignore: sized_box_for_whitespace
               child: Container(
                 height: 135,
                 child: Column(
